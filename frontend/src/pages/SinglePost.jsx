@@ -32,7 +32,6 @@ export default function SinglePost() {
               <div className="small text-muted">
                 Categorie: {post.categorie_nume}
               </div>
-              {console.log(post)}
               <div className="small text-muted">
                 Data:{" "}
                 {new Date(post.dataadaugare).toLocaleDateString("ro", {

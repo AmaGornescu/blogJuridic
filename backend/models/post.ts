@@ -7,7 +7,7 @@ export const findAll = (callback: Function) => {
   const queryString = `SELECT * FROM posts`;
   db.query(queryString, (err, result) => {
     if (err) {
-      callback(err); 
+      callback(err);
     }
     const rows = <RowDataPacket[]>result;
     const posts: Post[] = [];
@@ -19,7 +19,7 @@ export const findAll = (callback: Function) => {
         categorie_id: row.categorie_id,
         user_id: row.user_id,
         dataadaugare: row.dataadaugare,
-        poza: row.poza
+        poza: row.poza,
       };
       posts.push(post);
     });
@@ -34,7 +34,7 @@ export const findLast3 = (callback: Function) => {
   FROM posts p INNER JOIN categories c on p.categorie_id= c.id ORDER BY p.id DESC LIMIT 3`;
   db.query(queryString, (err, result) => {
     if (err) {
-      callback(err); 
+      callback(err);
     }
     const rows = <RowDataPacket[]>result;
     const posts: Post[] = [];
@@ -47,7 +47,7 @@ export const findLast3 = (callback: Function) => {
         user_id: row.user_id,
         dataadaugare: row.dataadaugare,
         poza: row.poza,
-        categorie_nume:row.nume
+        categorie_nume: row.nume,
       };
       posts.push(post);
     });
@@ -58,14 +58,14 @@ export const findAllCategories = (callback: Function) => {
   const queryString = `SELECT * FROM categories`;
   db.query(queryString, (err, result) => {
     if (err) {
-      callback(err); 
+      callback(err);
     }
     const rows = <RowDataPacket[]>result;
     const categories: Category[] = [];
     rows.forEach((row) => {
       const category: Category = {
         id: row.id,
-        nume: row.nume
+        nume: row.nume,
       };
       categories.push(category);
     });
@@ -89,8 +89,7 @@ export const findOne = (postId: number, callback: Function) => {
       user_id: row.user_id,
       dataadaugare: row.dataadaugare,
       poza: row.poza,
-      categorie_nume:row.nume
-     
+      categorie_nume: row.nume,
     };
     callback(null, post);
   });
@@ -100,8 +99,7 @@ export const findOne = (postId: number, callback: Function) => {
 export const addPost = (post: Post, callback: Function) => {
   const queryString =
     "INSERT INTO posts (titlu, continut, categorie_id, user_id,poza) VALUES (?, ?, ?, ?, ?)";
-  console.log(post);
-  
+
   try {
     let sqldeb = db.query(
       queryString,
@@ -110,13 +108,11 @@ export const addPost = (post: Post, callback: Function) => {
         if (err) {
           callback(err);
         }
-        
-        if((<OkPacket>result) !== undefined){
+
+        if (<OkPacket>result !== undefined) {
           const insertId = (<OkPacket>result).insertId;
           callback(null, insertId);
-        }
-        else{
-          console.log('error insert');
+        } else {
           callback(null, 0);
         }
       }

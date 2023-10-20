@@ -1,14 +1,9 @@
-import React from "react";
-// Import Bootstrap
-
-import "bootstrap/dist/css/bootstrap.css";
-
+import React, { useContext } from "react";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faFontAwesome } from "@fortawesome/free-brands-svg-icons";
-
-// Import from react-router-dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Posts from "./pages/Posts";
@@ -22,9 +17,15 @@ import EditPost from "./components/EditPost";
 import NoPage from "./pages/NoPage";
 import Contact from "./pages/Contact";
 
+import { AuthContext } from "./context/authContext";
+
 import "./App.css";
+
+import "bootstrap/dist/css/bootstrap.css";
 library.add(fas, faTwitter, faFontAwesome);
+
 function App() {
+  const { authenticated } = useContext(AuthContext);
   return (
     <React.StrictMode>
       <BrowserRouter>
@@ -39,10 +40,32 @@ function App() {
             <Route path="contact" element={<Contact />} />
 
             <Route path="/edit-user/:id" element={<EditUser />} />
-            <Route path="/view-users" element={<UserList />} />
 
-            <Route path="/add-post" element={<CreatePost />} />
-            <Route path="/edit-post/:id" element={<EditPost />} />
+            <Route
+              path="/utilizatori"
+              element={
+                <ProtectedRoute user={authenticated}>
+                  <UserList />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/add-post"
+              element={
+                <ProtectedRoute user={authenticated}>
+                  <CreatePost />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/edit-post/:id"
+              element={
+                <ProtectedRoute user={authenticated}>
+                  <EditPost />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

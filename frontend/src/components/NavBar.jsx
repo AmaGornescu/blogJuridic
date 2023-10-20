@@ -5,6 +5,7 @@ import { FaScaleBalanced } from "react-icons/fa6";
 
 export default function NavBar() {
   const { authenticated, logout } = useContext(AuthContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-header position-sticky top-0 z-3">
       <div className="container">
@@ -88,7 +89,7 @@ export default function NavBar() {
                   </NavLink>
 
                   <NavLink
-                    to="/view-users"
+                    to="/utilizatori"
                     activeclassname="active"
                     className="nav-link"
                   >
@@ -103,6 +104,7 @@ export default function NavBar() {
                   activeclassname="aaa"
                   onClick={logout}
                   className="nav-link"
+                  to="/"
                 >
                   Logout
                 </NavLink>

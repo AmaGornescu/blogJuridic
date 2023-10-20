@@ -29,7 +29,6 @@ export const AuthContexProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // alert('context');
     if (currentUser != null) {
       localStorage.setItem("user", JSON.stringify(currentUser));
       setauthenticated(true);

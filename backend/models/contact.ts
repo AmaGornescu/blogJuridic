@@ -20,7 +20,6 @@ export const addContact = (contact: Contact, callback: Function) => {
           const insertId = (<OkPacket>result).insertId;
           callback(null, insertId);
         } else {
-          //console.log("error insert");
           callback(null, 0);
         }
       }

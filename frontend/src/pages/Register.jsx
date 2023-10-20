@@ -50,17 +50,14 @@ export default function Register() {
       .then((res) => {
         if (res.status === 200) {
           alert("User successfully created");
-          console.log(res.message);
 
           navigate("/mylogin");
         } else Promise.reject();
       })
       .catch((err) => {
         alert("Something went wrong");
-        console.log(err.response.data);
       });
   };
-  console.log("authenticated", authenticated);
   if (authenticated) {
     // Redirect
     alert(1234);

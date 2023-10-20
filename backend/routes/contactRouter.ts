@@ -19,9 +19,7 @@ contactRouter.post(
     check("mesaj", "Mesaj is required").not().isEmpty(),
   ],
   async (req: Request, res: Response) => {
-    //console.log(req.body, "REQ BODY");
     const errors = validationResult(req);
-    //console.log(errors, "ERRORS");
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
     }

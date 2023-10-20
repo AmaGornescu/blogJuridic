@@ -4,6 +4,9 @@ import configData from "../config.json";
 import { BiEdit } from "react-icons/bi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { Button, Modal } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function UserList() {
   const [userList, setUserList] = useState([]);
@@ -11,6 +14,8 @@ export default function UserList() {
   const [modalAction, setModalAction] = useState("");
   const [activeUser, setActiveUser] = useState({});
   const [message, setMessage] = useState("");
+
+  const notify = () => toast("Wow so easy!");
 
   const token = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
@@ -26,7 +31,7 @@ export default function UserList() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [token.accessToken]);
 
   const handleModalOpen = (type, user) => {
     type === "edit" ? setModalAction("edit") : setModalAction("delete");
@@ -47,6 +52,7 @@ export default function UserList() {
       setUserList(newUserList);
     } catch (err) {
       setMessage("Utilizatorul nu a fost sters cu succes!");
+      notify(message);
     }
   };
 
@@ -101,6 +107,7 @@ export default function UserList() {
                   <AiOutlineDelete color="white" /> Sterge
                 </Button>
               </div>
+              <ToastContainer />
               <div
                 className="modal show"
                 style={{ display: "block", position: "initial" }}

@@ -38,7 +38,6 @@ export default function Home() {
     axios
       .get(configData.SERVER_POST_URL + "last3")
       .then(({ data }) => {
-        console.log(data["data"]);
         const updatedData = replaceHtmlTagsRecursive(data["data"]);
         setPosts(updatedData);
       })

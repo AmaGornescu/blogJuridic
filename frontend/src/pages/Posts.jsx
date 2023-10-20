@@ -35,11 +35,9 @@ const replaceHtmlTagsRecursive = (data) => {
 export default function Posts() {
   const [posts, setPosts] = useState([{}]);
   useEffect(() => {
-    console.log("primesc datele");
     axios
       .get(configData.SERVER_POST_URL)
       .then(({ data }) => {
-        console.log(data["data"]);
         const updatedData = replaceHtmlTagsRecursive(data["data"]);
         setPosts(updatedData);
       })
@@ -54,7 +52,6 @@ export default function Posts() {
         <div className="container">
           <div className="row">
             <h1 className="text-center my-5 title-heading">Articole</h1>
-            {console.log(posts, "lala")}
             {posts.map((data, index) => (
               <div
                 key={index}

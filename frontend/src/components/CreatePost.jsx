@@ -50,15 +50,13 @@ export default function CreatePost() {
   });
 
   useEffect(() => {
-    console.log("primesc datele");
     axios
       .get(configData.SERVER_POST_URL + "categories")
       .then(({ data }) => {
-        console.log(data["data"]);
         setSelectCategories(data["data"]);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
@@ -93,22 +91,16 @@ export default function CreatePost() {
       .then((res) => {
         if (res.status === 200) {
           alert("Post successfully created");
-          console.log(res.message);
 
           navigate("/view-posts");
         } else Promise.reject();
       })
       .catch((err) => {
         alert("Something went wrong");
-        console.log(err.response.data);
       });
-    // setFormData(values => ({}))
   };
   const loggedInUser = localStorage.getItem("authenticated");
-  //alert(typeof loggedInUser);
   if (loggedInUser === "false") {
-    // Redirect
-    //alert(1234);
     return <Navigate replace to="/posts" />;
   } else {
     return (

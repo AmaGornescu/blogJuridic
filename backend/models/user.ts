@@ -54,7 +54,6 @@ export const create = (user: User, callback: Function) => {
     } else {
       const queryString =
         "INSERT INTO users (nume, prenume, email, parola) VALUES (?, ?, ?, ?)";
-      console.log("insert",user);
       let saltRounds = bcryptjs.genSaltSync(10);
       let password_hash = bcryptjs.hashSync(user.parola!, saltRounds);
       try {
@@ -124,7 +123,6 @@ export const veifyPassword = (user: User, callback: Function) => {
         };
         callback(null, user);
       } else {
-        console.log("Password doesn't match!");
         callback("Invalid Password!" + err?.message);
       }
     } else {

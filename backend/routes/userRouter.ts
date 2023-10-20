@@ -55,9 +55,7 @@ userRouter.post(
     ),
   ],
   async (req: Request, res: Response) => {
-    console.log(req.body);
     const errors = validationResult(req);
-    console.log(errors);
     if (!errors.isEmpty()) {
       return res.status(400).json({ message: errors.array() });
     }
@@ -83,13 +81,10 @@ userRouter.put("/:id", jsonParser, async (req: Request, res: Response) => {
     });
   }
   const user: User = req.body;
-  console.log(req.body);
   userModel.update(user, (err: Error) => {
     if (err) {
       return res.status(500).json({ message: err.message });
     }
-
-    // res.status(200).send();
     res.status(200).json({
       message: "success",
     });
@@ -103,7 +98,6 @@ userRouter.delete("/:id", jsonParser, async (req: Request, res: Response) => {
     });
   }
   const userId: number = Number(req.params.id);
-  console.log(userId);
   userModel.deleteUser(userId, (err: Error) => {
     if (err) {
       return res.status(500).json({ message: err.message });
@@ -119,7 +113,6 @@ userRouter.post(
   "/verifyLogin",
   jsonParser,
   async (req: Request, res: Response) => {
-    console.log(req.body);
     const loginUser: User = req.body;
     userModel.veifyPassword(loginUser, (err: Error, user: User) => {
       if (err) {
@@ -130,7 +123,6 @@ userRouter.post(
         //return res.status(500).json({"message": err.message});
       }
       var token = generateToken();
-      console.log("JWT", token);
       //res.status(200).json({"message": 'success'});
       res.status(200).send({
         id: user.id,

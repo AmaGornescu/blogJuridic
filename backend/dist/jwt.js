@@ -33,45 +33,29 @@ dotenv.config();
 function generateToken() {
     // information to be encoded in the JWT
     const payload = {
-        name: 'ReactBlog',
-        accessTypes: [
-            'getPosts',
-            'addPost',
-            'updatePost',
-            'deletePost'
-        ]
+        name: "ReactBlog",
+        accessTypes: ["getPosts", "addPost", "updatePost", "deletePost"],
     };
     const signInOptions = {
-        algorithm: 'HS256',
-        expiresIn: '1h'
+        algorithm: "HS256",
+        expiresIn: "1h",
     };
     // generate JWT
     const key = process.env.SECRET_KEY;
     return (0, jsonwebtoken_1.sign)(payload, key, signInOptions);
 }
 exports.generateToken = generateToken;
-;
 function verifyToken(req, res) {
-    let token = req.headers["x-access-token"];
-    console.log('token', token);
+    let token = req.headers.authorization;
     if (!token) {
         return false;
-        // return res.status(403).send({
-        //   message: "No token provided!"
-        // });
     }
     let key = process.env.SECRET_KEY;
     jsonwebtoken_1.default.verify(token, key, (err, decoded) => {
         if (err) {
             return false;
-            // return res.status(401).send({
-            //   message: "Unauthorized!"
-            // });
         }
-        //req.admin = decoded.admin;
-        console.log('decoded', decoded);
     });
     return true;
 }
 exports.verifyToken = verifyToken;
-;

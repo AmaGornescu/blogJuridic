@@ -86,13 +86,7 @@ export default function NavBar() {
                   >
                     Adauga articol
                   </NavLink>
-                  <NavLink
-                    to="/view-posts"
-                    activeclassname="active"
-                    className="nav-link"
-                  >
-                    Vezi Articole
-                  </NavLink>
+
                   <NavLink
                     to="/view-users"
                     activeclassname="active"

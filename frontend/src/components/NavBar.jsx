@@ -81,7 +81,7 @@ export default function NavBar() {
                 <button className="dropbtn">Admin</button>
                 <div className="dropdown-content">
                   <NavLink
-                    to="/add-post"
+                    to="/admin/adauga-articol"
                     activeclassname="active"
                     className="nav-link"
                   >
@@ -89,7 +89,7 @@ export default function NavBar() {
                   </NavLink>
 
                   <NavLink
-                    to="/utilizatori"
+                    to="/admin/utilizatori"
                     activeclassname="active"
                     className="nav-link"
                   >

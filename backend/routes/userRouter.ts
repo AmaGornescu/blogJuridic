@@ -4,8 +4,7 @@ import * as bodyParser from "body-parser";
 import * as userModel from "../models/user";
 import { User } from "../types/User";
 import { check, validationResult } from "express-validator";
-import { generateToken } from "../jwt";
-import { verifyToken } from "../jwt";
+import { generateToken, verifyToken } from "../jwt";
 
 const userRouter = express.Router();
 var jsonParser = bodyParser.json();
@@ -80,6 +79,7 @@ userRouter.put("/:id", jsonParser, async (req: Request, res: Response) => {
       message: "<b>Trebuie sa fii logat pentru a accesa aceasta zona!<b>",
     });
   }
+
   const user: User = req.body;
   userModel.update(user, (err: Error) => {
     if (err) {

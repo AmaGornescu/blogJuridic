@@ -42,7 +42,7 @@ function App() {
             <Route path="/edit-user/:id" element={<EditUser />} />
 
             <Route
-              path="/utilizatori"
+              path="/admin/utilizatori"
               element={
                 <ProtectedRoute user={authenticated}>
                   <UserList />
@@ -51,7 +51,7 @@ function App() {
             />
 
             <Route
-              path="/add-post"
+              path="/admin/adauga-articol"
               element={
                 <ProtectedRoute user={authenticated}>
                   <CreatePost />
